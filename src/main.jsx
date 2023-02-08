@@ -2,23 +2,27 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 import './index.css'
+import Index, {loader as clientesLoader} from './pages/Index'
+import NuevoCliente from './pages/NuevoCliente'
 import Layout from './components/Layout'
 
 const router = createBrowserRouter([
   {
       path: '/',
       element: <Layout/>,
-      children:[
+      children:[ //outlet permite usar los children
         {
-          path: '/nosotros',
-          element: <h1> Nosotros</h1>
+          index: true,
+          element: <Index/>,
+          loader: clientesLoader
+        },
+        {
+          path: '/clientes/nuevo',
+          element: <NuevoCliente/>
         }
       ]
-  },
-  {
-      path: '/nosotros',
-      element: <h1> Nosotros</h1>
   }
+
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
